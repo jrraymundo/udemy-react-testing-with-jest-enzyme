@@ -9,7 +9,10 @@ export default function Counter() {
             The counter is currently&nbsp;
             <span data-test='count'>{count}</span>
         </h1>
-        <button data-test='counter-button' onClick={() => setCount(prevCount => prevCount + 1)}>
+        <button data-test='increment-button' onClick={() => setCount(prevCount => prevCount + 1)}>
+            Increment Button
+        </button>
+        <button data-test='decrement-button' onClick={() => setCount(prevCount => prevCount - 1)}>
             Increment Button
         </button>
     </div>

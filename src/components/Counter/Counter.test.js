@@ -27,7 +27,7 @@ test('renders without error', () => {
 
 test('renders increment button', () => {
     const wrapper = setup()
-    const CounterComponent = findByTestAttribute(wrapper, 'counter-button')
+    const CounterComponent = findByTestAttribute(wrapper, 'increment-button')
     expect(CounterComponent.exists()).toBe(true)
 })
 
@@ -59,7 +59,7 @@ test('clicking button increments counter display', () => {
     const wrapper = setup()
     
     // Find the button
-    const button = findByTestAttribute(wrapper, 'counter-button')
+    const button = findByTestAttribute(wrapper, 'increment-button')
 
     // Click the button
     button.simulate('click')
@@ -67,4 +67,15 @@ test('clicking button increments counter display', () => {
     // Find the display, and test that the counter has been incremented
     const count = findByTestAttribute(wrapper, 'count').text()
     expect(count).toBe("1")
+})
+
+test('clicking button decrements counter display', () => {
+    const wrapper = setup()
+    const initialCount = parseInt(findByTestAttribute(wrapper, 'count').text()) // 0
+    const button = findByTestAttribute(wrapper, 'decrement-button')
+    
+    button.simulate('click')    
+
+    const finalCount = parseInt(findByTestAttribute(wrapper, 'count').text()) // -1
+    expect(finalCount).toBeLessThan(initialCount)
 })
