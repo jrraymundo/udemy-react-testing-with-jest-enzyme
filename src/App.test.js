@@ -9,5 +9,9 @@ Enzyme.configure({ adapter: new EnzymeAdapter() })
 
 test('renders without crashing', () => {
   const wrapper = shallow(<App />);
-  console.log(wrapper.debug()) // Useful method for printing the html representation of the wrapper
+
+  // Useful method for printing the html representation of the wrapper
+  // console.log(wrapper.debug())
+
+  expect(wrapper.exists()).toBe(true)
 });
