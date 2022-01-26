@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/await-async-query */
 /* eslint-disable testing-library/no-debugging-utils */
 import React from 'react'
 import Enzyme, { shallow } from 'enzyme'
@@ -7,30 +8,44 @@ import Counter from './index'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
-test('renders without error', () => {
-    const wrapper = shallow(<Counter />)
+/*
+    Reusable function for creating our wrapper
+    it's usually helpful when you're testing more complex setups with a wrapper.
+ */
+const setup = () => shallow(<Counter />)
 
-    /* 
-        The find() method uses similar syntax with CSS for finding elements 
-        in this line, we make enzyme look for the custom data-test attribute
-    */
-    const CounterComponent = wrapper.find("[data-test='component-counter']")
+/*
+    Reusable function for finding our elements
+*/
+const findByTestAttribute = (wrapper, val) => wrapper.find(`[data-test='${val}']`)
+
+test('renders without error', () => {
+    const wrapper = setup()
+    const CounterComponent = findByTestAttribute(wrapper, 'component-counter')
+    expect(CounterComponent.length).toBe(1)
+})
+
+test('renders increment button', () => {
+    const wrapper = setup()
+    const CounterComponent = findByTestAttribute(wrapper, 'counter-button')
+    expect(CounterComponent.exists()).toBe(true)
+})
+
+test('renders counter display', () => {
+    const wrapper = setup()
+    const CounterComponent = findByTestAttribute(wrapper, 'counter-display')
 
     expect(CounterComponent.exists()).toBe(true)
 })
 
-test('renders increment button', () => {
-
-})
-
-test('renders counter display', () => {
-
-})
-
 test('counter display starts at 0', () => {
-
+    const wrapper = setup()
+    const CounterComponent = findByTestAttribute(wrapper, '')
+    // expect(CounterComponent.exists()).toBe(true)
 })
 
 test('clicking button increments counter display', () => {
-
+    const wrapper = setup()
+    const CounterComponent = findByTestAttribute(wrapper, '')
+    // expect(CounterComponent.exists()).toBe(true)
 })
