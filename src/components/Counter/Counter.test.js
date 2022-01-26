@@ -38,20 +38,20 @@ test('renders counter display', () => {
     expect(CounterComponent.exists()).toBe(true)
 })
 
+/* 
+    NOTE: The .text() method always returns a string.
+    Because of this, if you're expecting a number like 0, 
+    adjust your assertion to be a string "0" to avoid unintended errors in the test
+*/
 test('counter display starts at 0', () => {
     const wrapper = setup()
 
-    /* 
-        Note: .text() method always returns a string.
-        Because of this, if you're expecting a number like 0, 
-        adjust your assertion to be a string "0" to avoid unintended errors in the test
-    */
     const count = findByTestAttribute(wrapper, 'count').text()
     expect(count).toBe("0")
 })
 
 /*
-    Note: The ORDER of finding elements is IMPORTANT.
+    NOTE: The ORDER of finding elements is IMPORTANT.
     In this test, we should find count AFTER simulating the button click
     because we want to examine the state of counter after clicking the button.
 */
